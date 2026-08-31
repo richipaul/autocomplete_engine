@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #09090b; /* Deep dark background */
+    --foreground: #fafafa;
+    
+    --card: #18181b; /* Lighter dark for cards */
+    --card-foreground: #fafafa;
+    
+    --primary: #06b6d4; /* Cyan accent */
+    --primary-foreground: #09090b;
+    
+    --secondary: #a855f7; /* Purple secondary */
+    --secondary-foreground: #fafafa;
+    
+    --success: #22c55e;
+    --success-foreground: #09090b;
+    
+    --error: #ef4444;
+    --error-foreground: #fafafa;
+
+    --warning: #eab308;
+    --warning-foreground: #09090b;
+    
+    --border: #27272a;
+    --input: #27272a;
+    --ring: #06b6d4;
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-opacity-20 backdrop-blur-md bg-white/5 border border-white/10;
+  }
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Red squiggly underline for spell checker */
+.squiggly-error {
+  text-decoration: underline wavy var(--error);
+  text-decoration-skip-ink: none;
+}
