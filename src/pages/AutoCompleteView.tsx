@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, KeyboardEvent } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEngine } from '../context/EngineContext';
-import { Search, ChevronRight, Activity, Zap, Network, Terminal, Clock, CheckCircle2 } from 'lucide-react';
+import { Search, ChevronRight, Activity, Network, Clock, CheckCircle2 } from 'lucide-react';
 import { cn } from '../components/layout/Sidebar';
 
 const AutoCompleteView = () => {
@@ -45,7 +45,7 @@ const AutoCompleteView = () => {
     }
   }, [query, trie, addLog, updateMetrics]);
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (suggestions.length === 0) return;
 
     if (e.key === 'ArrowDown') {

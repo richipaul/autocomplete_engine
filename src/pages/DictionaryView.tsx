@@ -109,7 +109,7 @@ const DictionaryView = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredAndSortedDict.map((item, i) => (
+                {filteredAndSortedDict.map((item) => (
                   <tr key={item.word} className="border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors group">
                     <td className="p-4 font-mono text-zinc-200 font-medium">{item.word}</td>
                     <td className="p-4 font-mono text-zinc-400">{item.frequency}</td>

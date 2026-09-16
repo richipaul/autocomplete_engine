@@ -1,5 +1,4 @@
-import React from 'react';
-import { LineChart, Network, Calculator, Hash, ArrowRight } from 'lucide-react';
+import { LineChart, Network, Calculator, Hash } from 'lucide-react';
 import { cn } from '../components/layout/Sidebar';
 
 const AlgorithmAnalysisView = () => {

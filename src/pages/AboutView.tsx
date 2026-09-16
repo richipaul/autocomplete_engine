@@ -1,6 +1,4 @@
-import React from 'react';
 import { Info, Code2, Cpu, GitBranch, KeySquare } from 'lucide-react';
-import { cn } from '../components/layout/Sidebar';
 
 const AboutView = () => {
   return (

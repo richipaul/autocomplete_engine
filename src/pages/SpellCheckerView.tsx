@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { useEngine } from '../context/EngineContext';
 import { levenshteinDistance, type EditDistanceResult } from '../lib/dsa/EditDistance';
-import { SpellCheck, ArrowRight, Wand2, Calculator, PlayCircle } from 'lucide-react';
+import { SpellCheck, ArrowRight, Wand2, Calculator } from 'lucide-react';
 import { cn } from '../components/layout/Sidebar';
 
 const SpellCheckerView = () => {

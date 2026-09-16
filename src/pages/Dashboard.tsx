@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEngine } from '../context/EngineContext';
-import { Book, Network, Zap, Clock, TerminalSquare, CheckCircle2, PlayCircle, StopCircle, RefreshCcw, Trash2 } from 'lucide-react';
+import { Book, Network, Zap, Clock, TerminalSquare, CheckCircle2, PlayCircle, StopCircle, Trash2 } from 'lucide-react';
 import { cn } from '../components/layout/Sidebar';
-
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { metrics, dictionary, logs, clearLogs, addLog, trie, addWord } = useEngine();
+  const { metrics, logs, clearLogs, addLog } = useEngine();
   const [demoState, setDemoState] = useState<'IDLE' | 'RUNNING'>('IDLE');
-  const [demoStep, setDemoStep] = useState(0);
+  const [, setDemoStep] = useState(0);
 
   const statCards = [
     { label: 'Dictionary Words', value: metrics.dictionarySize.toLocaleString(), icon: Book, color: 'text-blue-400', bg: 'bg-blue-400/10' },

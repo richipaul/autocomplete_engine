@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useEngine } from '../context/EngineContext';
-import { Trie, TrieNode } from '../lib/dsa/Trie';
-import { Network, Plus, Search, Trash2, RotateCcw, ChevronRight } from 'lucide-react';
+import { Trie, type TrieNode } from '../lib/dsa/Trie';
+import { Network, Plus, Search, Trash2, RotateCcw } from 'lucide-react';
 import { cn } from '../components/layout/Sidebar';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const TrieVisualizerView = () => {
   const { addLog } = useEngine();
@@ -158,7 +158,7 @@ const TrieVisualizerView = () => {
               <div className="absolute -top-3 left-[10%] right-[10%] h-0.5 bg-zinc-700 -z-10"></div>
             )}
 
-            {Array.from(node.children.entries()).map(([childChar, childNode], index, arr) => (
+            {Array.from(node.children.entries()).map(([childChar, childNode], _index, arr) => (
               <div key={childChar} className="relative pt-3 flex flex-col items-center">
                 {/* Vertical drops for children */}
                 <div className={cn("absolute top-0 w-0.5 h-3 -z-10", 

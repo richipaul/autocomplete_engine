@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode, useCallback } from 'react';
 import { Trie } from '../lib/dsa/Trie';
 import { INITIAL_DICTIONARY, type DictionaryWord } from '../data/dictionary';
 
