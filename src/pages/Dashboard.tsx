@@ -71,7 +71,7 @@ const Dashboard = () => {
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
             Auto-Complete & <br />
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Spell Checker Engine</span>
+            <span className="text-primary">Spell Checker Engine</span>
           </h1>
           <p className="text-zinc-400 text-lg md:text-xl max-w-2xl leading-relaxed">
             Explore how Trie-based prefix searching and edit-distance algorithms power intelligent text suggestions and spell correction.
@@ -79,7 +79,7 @@ const Dashboard = () => {
           <div className="flex flex-wrap gap-4 pt-4">
             <button 
               onClick={() => navigate('/autocomplete')}
-              className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+              className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
             >
               Try Auto-Complete
             </button>
@@ -93,7 +93,7 @@ const Dashboard = () => {
             {demoState === 'IDLE' ? (
               <button 
                 onClick={runDemo}
-                className="px-6 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/90 transition-colors flex items-center gap-2 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                className="px-6 py-3 rounded-lg bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/90 transition-colors flex items-center gap-2"
               >
                 <PlayCircle className="w-5 h-5" /> RUN LIVE DEMO
               </button>

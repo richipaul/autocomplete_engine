@@ -4,7 +4,7 @@ const AboutView = () => {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-20 max-w-4xl mx-auto">
       <div className="text-center space-y-4 mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-br from-zinc-100 to-zinc-500 bg-clip-text text-transparent">Auto-Complete & Spell Checker Engine</h2>
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-primary">Auto-Complete & Spell Checker Engine</h2>
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-sm font-medium text-zinc-400">
           Data Structures & Algorithms Laboratory
         </div>

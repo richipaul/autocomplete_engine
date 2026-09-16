@@ -10,11 +10,11 @@
     --card: #18181b; /* Lighter dark for cards */
     --card-foreground: #fafafa;
     
-    --primary: #06b6d4; /* Cyan accent */
-    --primary-foreground: #09090b;
+    --primary: #ffffff; /* Solid White */
+    --primary-foreground: #09090b; /* Black text */
     
-    --secondary: #a855f7; /* Purple secondary */
-    --secondary-foreground: #fafafa;
+    --secondary: #27272a; /* Zinc 800 */
+    --secondary-foreground: #fafafa; /* White text */
     
     --success: #22c55e;
     --success-foreground: #09090b;
