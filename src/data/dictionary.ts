@@ -1,9 +1,11 @@
+import { COMMON_WORDS } from './commonWords';
+
 export interface DictionaryWord {
   word: string;
   frequency: number;
 }
 
-export const INITIAL_DICTIONARY: DictionaryWord[] = [
+const DSA_WORDS: DictionaryWord[] = [
   { word: "algorithm", frequency: 120 },
   { word: "array", frequency: 150 },
   { word: "binary", frequency: 110 },
@@ -47,5 +49,16 @@ export const INITIAL_DICTIONARY: DictionaryWord[] = [
   { word: "method", frequency: 205 },
   { word: "interface", frequency: 185 },
   { word: "iteration", frequency: 95 },
-  { word: "complexity", frequency: 150 }
+  { word: "complexity", frequency: 150 },
+  { word: "react", frequency: 420 },
+  { word: "vite", frequency: 390 },
+  { word: "tailwind", frequency: 380 },
+  { word: "node", frequency: 350 },
+  { word: "server", frequency: 220 },
+  { word: "client", frequency: 230 },
+  { word: "browser", frequency: 240 },
+  { word: "frontend", frequency: 260 },
+  { word: "backend", frequency: 250 },
 ];
+
+export const INITIAL_DICTIONARY: DictionaryWord[] = [...DSA_WORDS, ...COMMON_WORDS];

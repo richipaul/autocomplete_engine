@@ -25,10 +25,7 @@ const SpellCheckerView = () => {
   // Basic tokenizer that ignores punctuation for checking, but keeps it for display
   const cleanWord = (w: string) => w.replace(/[.,!?]/g, '').toLowerCase();
 
-  const handleWordClick = (word: string, index: number, e: React.MouseEvent) => {
-    const target = e.target as HTMLElement;
-    const rect = target.getBoundingClientRect();
-    
+  const handleWordClick = (word: string, index: number) => {
     const cleaned = cleanWord(word);
     
     // Calculate Edit Distance for suggestions
@@ -45,8 +42,29 @@ const SpellCheckerView = () => {
     updateMetrics({ lastExecutionTime: end - start });
     addLog(`> Edit Distance calculated for "${cleaned}": ${(end-start).toFixed(2)}ms`);
 
-    setSelectedWord({ word: cleaned, index, rect });
+    setSelectedWord({ word: cleaned, index, rect: new DOMRect() });
     setCorrections(candidates);
+  };
+
+  const handleTextAreaClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {
+    const textarea = e.currentTarget;
+    const cursorPosition = textarea.selectionStart;
+    
+    let currentPos = 0;
+    for (let i = 0; i < words.length; i++) {
+      const word = words[i];
+      const nextPos = currentPos + word.length;
+      
+      if (cursorPosition >= currentPos && cursorPosition <= nextPos && word.trim().length > 0) {
+        const cleaned = cleanWord(word);
+        if (cleaned.length > 0 && cleaned.match(/[a-z]/i) && !dictMap.has(cleaned)) {
+           handleWordClick(word, i);
+           return;
+        }
+      }
+      currentPos = nextPos;
+    }
+    setSelectedWord(null);
   };
 
   const applyCorrection = (correction: string) => {
@@ -97,10 +115,24 @@ const SpellCheckerView = () => {
             </div>
             
             <div className="relative flex-1 overflow-hidden bg-black/20">
+              {/* Actual Textarea */}
+              <textarea
+                ref={textAreaRef}
+                value={text}
+                onClick={handleTextAreaClick}
+                onChange={(e) => {
+                  setText(e.target.value);
+                  setSelectedWord(null);
+                }}
+                onScroll={syncScroll}
+                className="absolute inset-0 p-4 w-full h-full bg-transparent text-[var(--foreground)] font-mono text-lg resize-none focus:outline-none focus:ring-0 z-0"
+                spellCheck="false"
+              />
+
               {/* Highlight Overlay */}
               <div 
                 ref={overlayRef}
-                className="absolute inset-0 p-4 font-mono text-lg whitespace-pre-wrap break-words pointer-events-auto overflow-auto text-transparent"
+                className="absolute inset-0 p-4 font-mono text-lg whitespace-pre-wrap break-words pointer-events-none overflow-hidden text-transparent z-10"
                 aria-hidden="true"
               >
                 {words.map((word, i) => {
@@ -112,9 +144,7 @@ const SpellCheckerView = () => {
                     return (
                       <span 
                         key={i} 
-                        className="squiggly-error cursor-pointer text-transparent relative z-10"
-                        onClick={(e) => handleWordClick(word, i, e)}
-                        title="Click for corrections"
+                        className="squiggly-error text-transparent"
                       >
                         {word}
                       </span>
@@ -123,19 +153,6 @@ const SpellCheckerView = () => {
                   return <span key={i}>{word}</span>;
                 })}
               </div>
-
-              {/* Actual Textarea */}
-              <textarea
-                ref={textAreaRef}
-                value={text}
-                onChange={(e) => {
-                  setText(e.target.value);
-                  setSelectedWord(null);
-                }}
-                onScroll={syncScroll}
-                className="absolute inset-0 p-4 w-full h-full bg-transparent text-[var(--foreground)] font-mono text-lg resize-none focus:outline-none focus:ring-0"
-                spellCheck="false"
-              />
             </div>
           </div>
           
