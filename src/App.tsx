@@ -14,12 +14,13 @@ function App() {
   return (
     <EngineProvider>
       <Router>
-        <div className="flex h-screen overflow-hidden bg-background text-foreground relative">
+        <div className="flex h-screen overflow-hidden bg-transparent text-foreground relative">
           <ParticlesBackground />
-          <Sidebar />
-          <main className="flex-1 overflow-y-auto p-6 lg:p-10 relative">
-            {/* Background ambient glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+          <div className="flex w-full h-full z-10 relative">
+            <Sidebar />
+            <main className="flex-1 overflow-y-auto p-6 lg:p-10 relative">
+              {/* Background ambient glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
             
             <div className="max-w-6xl mx-auto h-full">
               <Routes>
@@ -34,6 +35,7 @@ function App() {
               </Routes>
             </div>
           </main>
+        </div>
         </div>
       </Router>
     </EngineProvider>

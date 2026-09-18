@@ -38,21 +38,26 @@ const ParticlesBackground = () => {
 
     const initParticles = () => {
       particles = [];
-      // Proportional particle count based on screen area
-      const particleCount = Math.floor((width * height) / 12000);
-      const count = Math.max(50, Math.min(150, particleCount));
+      // Calculate particle density
+      const particleCount = Math.floor((width * height) / 9000);
+      const count = Math.max(80, Math.min(180, particleCount));
 
       for (let i = 0; i < count; i++) {
-        const radius = Math.random() * 1.5 + 0.5; // 0.5px to 2px
-        const maxAlpha = Math.random() * 0.65 + 0.2; // 0.2 to 0.85 opacity
+        const radius = Math.random() * 1.8 + 0.6; // 0.6px to 2.4px
+        const maxAlpha = Math.random() * 0.7 + 0.25; // 0.25 to 0.95 opacity
+        
+        // Random velocity for floating space effect
+        const speed = Math.random() * 0.6 + 0.2;
+        const angle = Math.random() * Math.PI * 2;
+        
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
           radius,
           alpha: Math.random() * maxAlpha,
           maxAlpha,
-          speedX: (Math.random() - 0.5) * 0.4, // subtle random speed X
-          speedY: (Math.random() - 0.5) * 0.4, // subtle random speed Y
+          speedX: Math.cos(angle) * speed,
+          speedY: Math.sin(angle) * speed,
           pulseSpeed: Math.random() * 0.015 + 0.005,
         });
       }
@@ -61,33 +66,62 @@ const ParticlesBackground = () => {
     initParticles();
 
     const render = () => {
-      ctx.clearRect(0, 0, width, height);
+      // Clear and fill dark space background
+      ctx.fillStyle = '#09090b';
+      ctx.fillRect(0, 0, width, height);
 
+      // Draw particle connections (subtle constellation lines)
+      const maxDistance = 110;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDistance) {
+            const lineAlpha = (1 - dist / maxDistance) * 0.12 * particles[i].alpha;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${lineAlpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw white particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Move particle
+        // Move particle randomly in space
         p.x += p.speedX;
         p.y += p.speedY;
 
-        // Twinkle / pulse effect
+        // Subtle twinkling pulse
         p.alpha += p.pulseSpeed;
-        if (p.alpha > p.maxAlpha || p.alpha < 0.1) {
+        if (p.alpha > p.maxAlpha || p.alpha < 0.15) {
           p.pulseSpeed = -p.pulseSpeed;
         }
 
-        // Screen boundary wrap around
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
+        // Screen wrap-around
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
+        if (p.y < -10) p.y = height + 10;
+        if (p.y > height + 10) p.y = -10;
 
-        // Draw particle
+        // Draw particle dot
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, Math.min(1, p.alpha))})`;
-        ctx.shadowBlur = p.radius > 1.2 ? 6 : 0;
-        ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0.1, Math.min(1, p.alpha))})`;
+        
+        if (p.radius > 1.4) {
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.9)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+
         ctx.fill();
       }
 
@@ -105,7 +139,7 @@ const ParticlesBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none -z-10 bg-[var(--background)]"
+      className="fixed inset-0 pointer-events-none z-0"
     />
   );
 };
