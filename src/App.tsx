@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/layout/Sidebar';
+import ParticlesBackground from './components/layout/ParticlesBackground';
 import { EngineProvider } from './context/EngineContext';
 import Dashboard from './pages/Dashboard';
 import AutoCompleteView from './pages/AutoCompleteView';
@@ -13,7 +14,8 @@ function App() {
   return (
     <EngineProvider>
       <Router>
-        <div className="flex h-screen overflow-hidden bg-background text-foreground">
+        <div className="flex h-screen overflow-hidden bg-background text-foreground relative">
+          <ParticlesBackground />
           <Sidebar />
           <main className="flex-1 overflow-y-auto p-6 lg:p-10 relative">
             {/* Background ambient glow */}
